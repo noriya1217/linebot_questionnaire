@@ -1,0 +1,15 @@
+current directory: /Users/apple/workspace/linebot_sample/vendor/bundle/gems/bootsnap-1.4.4/ext/bootsnap
+/Users/apple/.rbenv/versions/2.6.3/bin/ruby -I /Users/apple/.rbenv/versions/2.6.3/lib/ruby/2.6.0 -r ./siteconf20190714-76860-1um825g.rb extconf.rb
+creating Makefile
+
+current directory: /Users/apple/workspace/linebot_sample/vendor/bundle/gems/bootsnap-1.4.4/ext/bootsnap
+make "DESTDIR=" clean
+
+current directory: /Users/apple/workspace/linebot_sample/vendor/bundle/gems/bootsnap-1.4.4/ext/bootsnap
+make "DESTDIR="
+compiling bootsnap.c
+linking shared-object bootsnap/bootsnap.bundle
+
+current directory: /Users/apple/workspace/linebot_sample/vendor/bundle/gems/bootsnap-1.4.4/ext/bootsnap
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 bootsnap.bundle ./.gem.20190714-76860-1n98otc/bootsnap
