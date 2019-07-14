@@ -27,13 +27,13 @@ class LinebotController < ApplicationController
         when Line::Bot::Event::MessageType::Text
           message = {
             type: 'text',
-            text: event.message['text']
+            text: event.message['#{text}ですか？']
           }
           client.reply_message(event['replyToken'], message)
         end
       end
     }
-    
+
     head :ok
   end
 end
