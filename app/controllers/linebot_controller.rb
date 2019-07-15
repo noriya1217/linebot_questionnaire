@@ -21,30 +21,42 @@ class LinebotController < ApplicationController
     events = client.parse_events_from(body)
 
     events.each { |event|
-      # if event.message['text'] =~ /おみくじ/
-      #   message[:text] = ["大吉", "中吉", "小吉", "凶", "大凶"].shuffle.first
-      #   responce = ["大吉", "中吉", "小吉", "凶", "大凶"].shuffle.first
-      # end
-
       case event
       when Line::Bot::Event::Message
         case event.type
         when Line::Bot::Event::MessageType::Text
-          if event.message['text'] == "はい"
-            responce = "Yen"
-          else
-            responce = "No"
+          if event.message['text'] =~ /アンケート/
+            client.reply_message(event['replyToken'], template)
           end
-          message = {
-            type: 'text',
-            # text: event.message['text']
-            test: responce
-          }
-          client.reply_message(event['replyToken'], message)
         end
       end
     }
 
     head :ok
+  end
+
+  private
+
+  def template
+    {
+      "type": "template",
+      "altText": "this is a confirm template",
+      "template": {
+          "type": "confirm",
+          "text": "今日のもくもく会は楽しいですか？",
+          "actions": [
+              {
+                "type": "message",
+                "label": "楽しい",
+                "text": "楽しい"
+              },
+              {
+                "type": "message",
+                "label": "楽しくない",
+                "text": "楽しくない"
+              }
+          ]
+      }
+    }
   end
 end

@@ -1,0 +1,15 @@
+current directory: /Users/apple/workspace/linebot_sample/vendor/bundle/gems/debug_inspector-0.0.3/ext/debug_inspector
+/Users/apple/.rbenv/versions/2.6.0/bin/ruby -I /Users/apple/.rbenv/versions/2.6.0/lib/ruby/2.6.0 -r ./siteconf20190715-56508-1j635l1.rb extconf.rb
+creating Makefile
+
+current directory: /Users/apple/workspace/linebot_sample/vendor/bundle/gems/debug_inspector-0.0.3/ext/debug_inspector
+make "DESTDIR=" clean
+
+current directory: /Users/apple/workspace/linebot_sample/vendor/bundle/gems/debug_inspector-0.0.3/ext/debug_inspector
+make "DESTDIR="
+compiling debug_inspector.c
+linking shared-object debug_inspector.bundle
+
+current directory: /Users/apple/workspace/linebot_sample/vendor/bundle/gems/debug_inspector-0.0.3/ext/debug_inspector
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 debug_inspector.bundle ./.gem.20190715-56508-1vfph33
