@@ -25,8 +25,13 @@ class LinebotController < ApplicationController
       when Line::Bot::Event::Message
         case event.type
         when Line::Bot::Event::MessageType::Text
+          # アンケートという文字列を受信したら、メソッドtemplate_q1を呼び出す
           if event.message['text'] =~ /アンケート/
-            client.reply_message(event['replyToken'], template)
+            client.reply_message(event['replyToken'], template_q1)
+
+          # Q1.○○○…という文字列を受信したら、メソッドtemplate_q2を呼び出す
+          elsif event.message['text'] =~ /Q1\..*/
+            client.reply_message(event['replyToken'], template_q2)
           end
         end
       end
@@ -37,23 +42,46 @@ class LinebotController < ApplicationController
 
   private
 
-  def template
+  def template_q1
     {
       "type": "template",
       "altText": "this is a confirm template",
       "template": {
           "type": "confirm",
-          "text": "今日のもくもく会は楽しいですか？",
+          "text": "Q1.今日のもくもく会は楽しいですか？",
           "actions": [
               {
                 "type": "message",
                 "label": "楽しい",
-                "text": "楽しい"
+                "text": "Q1.楽しい"
               },
               {
                 "type": "message",
                 "label": "楽しくない",
-                "text": "楽しくない"
+                "text": "Q1.楽しくない"
+              }
+          ]
+      }
+    }
+  end
+
+  def template_q2
+    {
+      "type": "template",
+      "altText": "this is a confirm template",
+      "template": {
+          "type": "confirm",
+          "text": "Q2.このQiita記事は参考になりましたか？",
+          "actions": [
+              {
+                "type": "message",
+                "label": "はい",
+                "text": "Q2.はい"
+              },
+              {
+                "type": "message",
+                "label": "いいえ",
+                "text": "Q2.いいえ"
               }
           ]
       }
