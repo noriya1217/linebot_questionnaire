@@ -1,6 +1,4 @@
 class LinebotController < ApplicationController
-  require 'line/bot'
-
   protect_from_forgery :except => [:callback]
 
   def client
@@ -26,12 +24,17 @@ class LinebotController < ApplicationController
         case event.type
         when Line::Bot::Event::MessageType::Text
           # アンケートという文字列を受信したら、メソッドtemplate_q1を呼び出す
-          if event.message['text'] =~ /アンケート/
+          if event.message['text'].eql?('アンケート')
             client.reply_message(event['replyToken'], template_q1)
 
           # Q1.○○○…という文字列を受信したら、メソッドtemplate_q2を呼び出す
-          elsif event.message['text'] =~ /Q1\..*/
+          elsif event.message['text'].start_with?("Q1.")
             client.reply_message(event['replyToken'], template_q2)
+
+          # Q2.○○○…という文字列を受信したら、メソッドtemplate_q3を呼び出す
+          elsif event.message['text'].start_with?("Q2.")
+            client.reply_message(event['replyToken'], template_q3)
+
           end
         end
       end
@@ -82,6 +85,29 @@ class LinebotController < ApplicationController
                 "type": "message",
                 "label": "いいえ",
                 "text": "Q2.いいえ"
+              }
+          ]
+      }
+    }
+  end
+
+  def template_q3
+    {
+      "type": "template",
+      "altText": "this is a confirm template",
+      "template": {
+          "type": "confirm",
+          "text": "Q3.他のAPIを使ったLINE Botを作りたいですか？",
+          "actions": [
+              {
+                "type": "message",
+                "label": "はい",
+                "text": "Q3.はい"
+              },
+              {
+                "type": "message",
+                "label": "いいえ",
+                "text": "Q3.いいえ"
               }
           ]
       }
